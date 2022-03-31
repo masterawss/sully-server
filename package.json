@@ -1,0 +1,66 @@
+{
+  "name": "sully",
+  "version": "1.0.0",
+  "description": "Sully Server",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src --out-dir dist",
+    "start": "node dist/index.js",
+    "dev": "nodemon --exec npx babel-node src/server.js",
+    "prettier": "prettier --config ./.prettierrc --write \"**/*.js\"",
+    "pretest": "eslint --ignore-path .gitignore .",
+    "postinstall": "rm -rf dist && yarn run build",
+    "lint": "yarn prettier --write --check --config ./.prettierrc \"**/*.js\" && eslint --fix ./src",
+    "release": "release-it patch --no-npm.publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/masterawss/sully-server.git"
+  },
+  "keywords": [
+    "sully",
+    "app",
+    "education",
+    "course",
+    "courses",
+    "learn",
+    "schedule"
+  ],
+  "author": "Anthony Will Solsol Soplin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/masterawss/sully-server/issues"
+  },
+  "homepage": "https://github.com/masterawss/sully-server#readme",
+  "dependencies": {
+    "@babel/cli": "^7.17.0",
+    "@babel/core": "^7.17.2",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.11",
+    "@graphql-tools/graphql-file-loader": "^7.3.3",
+    "@graphql-tools/load": "^7.5.1",
+    "@graphql-tools/load-files": "^6.5.3",
+    "@graphql-tools/merge": "^8.2.2",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.3",
+    "babel-preset-env": "^1.7.0",
+    "dotenv": "^16.0.0",
+    "eslint": "^8.9.0",
+    "eslint-plugin-babel": "^5.3.1",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "express": "^4.17.2",
+    "express-graphql": "^0.12.0",
+    "fs-extra": "^10.0.0",
+    "graphql": "^16.3.0",
+    "graphql-scalars": "^1.14.1",
+    "graphql-tools": "^8.2.0",
+    "mongoose": "^6.2.1",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.1"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^6.0.0-alpha.6"
+  }
+}

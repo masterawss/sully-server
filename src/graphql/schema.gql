@@ -1,0 +1,55 @@
+scalar DateTime
+
+type Query{
+    getCourses: [Course]
+    getTopicsByCourseId(id: ID): [Topic]
+}
+
+type User{
+    _id                 : ID
+    name                : String
+    birth_date          : DateTime
+    avatar_url          : String
+    courses_suscribed   : [Suscribe!]
+    courses_teacher     : [CourseTeacher!]
+}
+
+type Course{
+    _id         : ID
+    title       : String
+    description : String
+    entity      : String
+
+    created_at  : DateTime
+    create_by   : User
+
+    topics      : [Topic!]
+}
+
+type CourseTeacher{
+    _id         : ID
+    course_id   : Course
+    teacher_id  : User
+}
+
+type Suscribe{
+    _id         : ID
+    course_id   : ID
+    teacher_id  : ID
+
+    course      : Course
+    teacher     : User
+}
+
+type Topic{
+    _id         : ID
+    course      : Course
+    course_id   : ID
+    title       : String
+    description : String
+    date        : DateTime
+
+    created_at  : DateTime
+    create_by   : User
+}
+

@@ -1,0 +1,4 @@
+name: sully
+recipe: mean
+node: 14
+database: mongo:5.0
