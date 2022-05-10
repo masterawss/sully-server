@@ -15,5 +15,3 @@ resolver_arrays.forEach((resolves, i) => {
     resolver = {...resolves, ...resolver}
 });
 export {resolver}
-
-

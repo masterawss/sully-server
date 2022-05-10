@@ -24,10 +24,11 @@
     "env": {
         "node": true
     },
-    "parser": "babel-eslint",
+    "parser": "@babel/eslint-parser",
     "parserOptions": {
         "sourceType": "module",
         "ecmaVersion": 2018,
+        "requireConfigFile": false,
         "ecmaFeatures": {
             "modules": true
         }

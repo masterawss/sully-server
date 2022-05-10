@@ -1,0 +1,79 @@
+datasource db {
+  url      = env("DATABASE_URL")
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator graphql {
+  provider = "graphql-schema-generator"
+  createCRUD = "false"
+}
+
+model User{
+  id        Int                @id @default(autoincrement())
+  email     String             @unique
+  name      String?
+  password  String?
+  courses   CoursesSuscribed[]
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+}
+
+model Topic {
+  id          Int      @id @default(autoincrement())
+  courseId    Int
+  title       String
+  description String?
+
+  startDate   DateTime
+  endDate     DateTime
+
+  
+  course      Course   @relation(fields: [courseId], references: [id])
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Course {
+  id          Int     @id @default(autoincrement())
+  title       String  @unique
+  description String?
+  entityId    Int
+  imgUrl      String?
+  startDate   DateTime @db.Date()
+  endDate     DateTime @db.Date()
+
+  entity      Entity  @relation(fields: [entityId], references: [id])
+
+  topics      Topic[]
+  users       CoursesSuscribed[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model CoursesSuscribed {
+  userId    Int
+  courseId  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id])
+  course Course @relation(fields: [courseId], references: [id])
+
+  @@id([userId, courseId])
+}
+
+model Entity {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String?
+  avatarUrl   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  courses     Course[]
+}
