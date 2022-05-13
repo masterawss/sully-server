@@ -5,8 +5,9 @@ const prisma = new PrismaClient()
 
 export default {
   setToogleCourseSucribed: async (args, context) => {
-    const { userId, prisma } = context();
+    const { userId, prisma } = context;
     const {courseId} = args
+
     // COMPROBAR QUE EL USUARIO ESTA SUSCRITO
     const isSuscribed = await prisma.coursesSuscribed.findMany({
       where: {

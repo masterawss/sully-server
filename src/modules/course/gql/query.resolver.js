@@ -4,23 +4,28 @@ const prisma = new PrismaClient()
 
 export default {
     getSuscribedCourses: async (args, context, _) => {
-        // console.log('CONTEXT', context);
         // console.log('ARGS-------------------------------------------------', args);
-        console.log('CONTEXT', context.userId);
-        // console.log('_', _); 
-        return context.prisma.course.findMany({
+        // console.log('CONTEXT', context.userId);
+        let coursesSuscribed = await prisma.coursesSuscribed.findMany({
             where: {
-                users: {
-                    every: {
-                        userId: context.userId
-                    }
-                }
+                userId: Number(context.userId)
+            },
+            select: {
+                courseId: true,
+            }
+        })
+        // console.log('COURSES SUSCRITOS', coursesSuscribed);
+        let courses = await context.prisma.course.findMany({
+            where: {
+                id: { in: coursesSuscribed.map(c => c.courseId) }
             },
             include: {
                 entity:true,
                 users:true
             }
         })
+        // console.log('COURSES', courses);
+        return courses
     },
     searchCourses: async (params, context) => {
         const results = await context.prisma.course.findMany({

@@ -6,6 +6,7 @@ type Query{
     getTodayUserTopics: [Topic]
     searchCourses(query: String): [Course]
     getCourseById(id: ID): Course
+    getUserTopics: [Topic]
 }
 
 type Mutation {

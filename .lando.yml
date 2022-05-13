@@ -1,4 +1,8 @@
-name: sully
+name: sully-app
 recipe: mean
-node: 14
-database: mongo:5.0
+config:
+  command: npm run dev
+  globals: []
+  port: '4000'
+  ssl: false
+  database: postgres
