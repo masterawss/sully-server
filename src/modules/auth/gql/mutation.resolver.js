@@ -4,8 +4,8 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 export default {
-  signup: async (parent, args, context, info) => {
-    console.log('ID', parent.userId);
+  signup: async (args, context, info) => {
+    console.log('ID', args.password);
     // 1
     const password = await bcrypt.hash(args.password, 10)
   

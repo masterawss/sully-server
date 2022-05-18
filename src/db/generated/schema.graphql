@@ -46,8 +46,6 @@ type Course {
 type CoursesSuscribed {
   createdAt: DateTime!
   updatedAt: DateTime!
-  userId: ID
-  courseId: ID
   user: User!
   course: Course!
 }

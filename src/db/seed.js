@@ -20,18 +20,17 @@ async function main() {
   console.log('COURSE CREATED', courses_create);
 
   let topic
-  for (let index = 0; index < 30; index++) {
-    let courseId = Math.floor(Math.random() * 2) + 1
-    console.log('COURSE ID: ' + courseId);
+
+  mockData.topics.forEach(async (topic, index) => {
     topic = {
-      courseId,
-      title       : `Tema ${index+1}`,
-      description : `Descripción - Tema ${index+1}`,
+      courseId: topic.courseId,
+      title       : topic.title,
+      description : topic.description,
       startDate   : new Date(moment().add(index, 'day').format('YYYY-MM-DD')+' 08:00:00'),
       endDate     : new Date(moment().add(index, 'day').format('YYYY-MM-DD')+' 13:00:00'),
     }
     await prisma.topic.create({data: topic})
-  }
+  })
 
   await prisma.user.create({data: {
     name: 'Anthony Will',

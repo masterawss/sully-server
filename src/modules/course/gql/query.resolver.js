@@ -32,10 +32,7 @@ export default {
             where: {
                 title: {
                     contains: params.query
-                },
-                description: {
-                    contains: params.query
-                },
+                }
             },
             include: {
                 entity:true,
